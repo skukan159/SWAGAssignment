@@ -1,4 +1,4 @@
-export const Event = (superclass) => class extends superclass {
+const Event = (superclass) => class extends superclass {
     constructor(time,place){
         this.time = time;
         this.place = place;
@@ -8,3 +8,4 @@ export const Event = (superclass) => class extends superclass {
     place() { this.place }
 }
 
+module.exports = { Event }

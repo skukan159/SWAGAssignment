@@ -90,7 +90,7 @@ const CloudCoverage =  (value,unit,time,place) => {
     )
 }
 
-const WeatherPrediction = (weatherData,unit,type,time,place) => {
+const WeatherPrediction = (unit,type,time,place) => {
     state = {weatherData,unit,type,time,place}
     return Object.assign({},
         weatherDataComparator(state),
@@ -100,20 +100,21 @@ const WeatherPrediction = (weatherData,unit,type,time,place) => {
         unitGetter(state))
 }
 
-const TemperaturePrediction = (weatherData,unit,type,time,place) => {
-    state = {weatherData,unit,type,time,place}
-    return Object.assign({}, temperatureConverter(state.weatherData),
+const TemperaturePrediction = (unit,time,place) => {
+    state = {unit,type:"Temperature",time,place}
+    return Object.assign({}, 
+        temperatureConverter(state),
         timeGetter(state),
-        placeGetter(state),    
+        placeGetter(state),
         typeGetter(state),
         unitGetter(state))
 }
 
 
-const PrecipitationPrediction = (types,weatherData,unit,type,time,place) => {
-    state = {types,weatherData,unit,type,time,place}
+const PrecipitationPrediction = (types,unit,time,place) => {
+    state = {types,unit,type:"Precipitation",time,place}
     return Object.assign({},
-        mmInchConverter(state.weatherData),
+        mmInchConverter(state),
         precipitationTypesGetter(state),
         timeGetter(state),
         placeGetter(state),    
@@ -121,8 +122,8 @@ const PrecipitationPrediction = (types,weatherData,unit,type,time,place) => {
         unitGetter(state))
 }
 
-const WindPrediction = (directions,weatherData,unit,type,time,place) => {
-    state = { directions,weatherData,unit,type,time,place}
+const WindPrediction = (directions,unit,time,place) => {
+    state = { directions,weatherData,unit,type:"Wind",time,place}
 
     return Object.assign({},
         windDirectionsGetter(state),
@@ -132,8 +133,8 @@ const WindPrediction = (directions,weatherData,unit,type,time,place) => {
         typeGetter(state),
         unitGetter(state))
 }
-const CloudCoveragePrediction = (weatherData,unit,type,time,place) => {
-    state = {weatherData,unit,type,time,place}
+const CloudCoveragePrediction = (unit,time,place) => {
+    state = {weatherData,unit,type:"Cloud Coverage",time,place}
     return Object.assign({},
         weatherDataComparator(state),
         timeGetter(state),

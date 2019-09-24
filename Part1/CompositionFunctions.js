@@ -76,7 +76,19 @@ const windDirectionsGetter = (state) => ({
 })
 
 const weatherDataComparator = (state) => ({
-    matches(weatherData) { state.weatherData === weatherData }
+    from(){ return state.from},
+    to(){ return state.to},
+    matches(weatherData)
+    { 
+        if(state.type === weatherData.type &&
+             state.unit === weatherData.unit)
+            {
+                if(weatherData.value >= state.from &&
+                     weatherData.value <= state.to){
+                    return true
+                } else return false;
+            }  
+    }
 })
 
 const hasPlace = (state) => ({

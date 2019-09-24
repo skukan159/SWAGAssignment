@@ -1,4 +1,4 @@
-export const DataType = (superclass) => class extends superclass {
+const DataType = (superclass) => class extends superclass {
     constructor(type,unit){
         this.type = type;
         this.unit = unit;
@@ -7,3 +7,6 @@ export const DataType = (superclass) => class extends superclass {
     type() { this.type }
     unit() { this.unit }
 }
+
+
+module.exports = { DataType }
