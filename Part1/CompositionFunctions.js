@@ -125,3 +125,7 @@ module.exports = { dateChecker,timeGetter,placeGetter,typeGetter,
     mmInchConverter,msMPHConverter,directionGetter,weatherDataComparator,
     hasPlace,hasType,hasCurrentPeriod,unitsConverter,hasWeatherData,
     timeGetter2,placeGetter2 }
+
+
+
+    
