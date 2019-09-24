@@ -38,9 +38,12 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         toDate.setFullYear(2000,22,12)
 
         let dateInterval = DateInterval(fromDate,toDate);
-        let testContainsDate = new Date();
+        expect(dateInterval.from()).toBe(fromDate)
+        expect(dateInterval.to()).toBe(toDate)
 
+        let testContainsDate = new Date();
         testContainsDate.setFullYear(1998,18,5);
+
         expect(dateInterval.contains(testContainsDate)).toBe(true);
         testContainsDate.setFullYear(2002,18,5);
         expect(dateInterval.contains(testContainsDate)).not.toBe(true);
@@ -124,6 +127,30 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(cloudCoverage.type()).toBe("Cloud Coverage");
         expect(cloudCoverage.unit()).toBe("Unknown");
 
+        
+    })
+
+  /*  test('WeatherPrediction tests', () => {
+        let date = new Date();
+
+        let toNumber = new Number(5);
+        let fromNumber = new Number(10);
+
+        let testMatchesPrediction = new WeatherData();
+        weatherData = (10,"Temperature","Celsius",date,"Horsens");
+
+        let weatherPrediction = WeatherPrediction(weatherData,"Unknown", date, "Horsens");
+ 
+        
+        expect(weatherPrediction.matches(testMatchesPrediction)).toBe(true);
+    })*/
+
+    test('WeatherHistory tests', () => {
+        let date = new Date();
+        let testWeatherData2 = new WeatherData(10,"Temperature2","Cels234ius",date,"Horsens2");
+        let testWeatherData = new WeatherData(10,"Temperature4","Cels234ius",date,"Horsens3");
+        let testWeatherData3 = new WeatherData(10,"Temperature4","Cels234ius",date,"Horsens4");
+        let testWeatherHistory = new WeatherHistory(testWeatherData,'Horsens3');
         
     })
 
