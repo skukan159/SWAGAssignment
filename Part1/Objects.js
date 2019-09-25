@@ -102,7 +102,7 @@ const CloudCoverage =  (value,unit,time,place) => {
         hasDataType(state))
 }
 
-const WeatherPrediction = (from,to,unit,type,time,place) => {
+const WeatherPrediction = (from,to,type,unit,time,place) => {
     state = {from,to,unit,type,time,place}
 
     state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
@@ -160,7 +160,7 @@ const CloudCoveragePrediction = (from,to,unit,time,place) => {
 
     state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
-    
+
     return Object.assign({},
         weatherDataComparator(state),
         hasEvent(state),   

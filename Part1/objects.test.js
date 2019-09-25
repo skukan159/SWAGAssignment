@@ -159,7 +159,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         
     })
 
-    /*test('Temperature prediction test', () => {
+    test('Temperature prediction test', () => {
         let date = new Date();
         let temperaturePredictionData = TemperaturePrediction(10,15,"Celsius",date,"Horsens");
 
@@ -177,19 +177,9 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
 
         temperaturePredictionData.convertToInternational();
         expect(temperaturePredictionData.from()).toBe(10);
-        expect(temperaturePredictionData.from()).toBe(15);
+        expect(temperaturePredictionData.to()).toBe(15);
         expect(temperaturePredictionData.unit()).toBe("Celsius");
-    })*/
-
-
-/*
-    test('WeatherHistory tests', () => {
-        let date = new Date();
-        let testWeatherData2 = new WeatherData(10,"Temperature2","Cels234ius",date,"Horsens2");
-        let testWeatherData = new WeatherData(10,"Temperature4","Cels234ius",date,"Horsens3");
-        let testWeatherData3 = new WeatherData(10,"Temperature4","Cels234ius",date,"Horsens4");
-        let testWeatherHistory = new WeatherHistory(testWeatherData,'Horsens3');
-        
     })
-*/
+
+
     

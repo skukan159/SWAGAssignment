@@ -10,7 +10,7 @@ const typeChecker = () => ({
     { 
         let correctTypeEntered = acceptedTypes.includes(givenType.toLowerCase());
         if(correctTypeEntered === false){
-            console.log("Incorrect data type entered : " + givenType +". Setting to default value which is: " + acceptedTypes[0])
+            console.log("Incorrect data type entered : " + givenType + ". Setting to default value which is: " + acceptedTypes[0])
             givenType = acceptedTypes[0];
         }
         return givenType;
@@ -22,7 +22,7 @@ const typeChecker = () => ({
             case "temperature":
                     correctUnitEntered = acceptedTemperatureUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for temperature: " + givenType + " Setting to default: " + acceptedTemperatureUnits[0])
+                        console.log("Incorrect unit value entered for temperature: " + givenUnit.toLowerCase() + " Setting to default: " + acceptedTemperatureUnits[0])
                         return acceptedTemperatureUnits[0];
                     } 
                 break;
@@ -30,7 +30,7 @@ const typeChecker = () => ({
             case "distance":
                     correctUnitEntered = acceptedDistanceUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for precipitation/distance: " + givenType + " Setting to default: " + acceptedDistanceUnits[0])
+                        console.log("Incorrect unit value entered for precipitation/distance: " + givenUnit.toLowerCase() + " Setting to default: " + acceptedDistanceUnits[0])
                         return acceptedDistanceUnits[0];
                     } 
                 break;
@@ -38,14 +38,14 @@ const typeChecker = () => ({
             case "speed":
                     correctUnitEntered = acceptedSpeedUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for wind/speed: " + givenType + " Setting to default: " + acceptedSpeedUnits[0])
+                        console.log("Incorrect unit value entered for wind/speed: " + givenUnit.toLowerCase() + " Setting to default: " + acceptedSpeedUnits[0])
                         return acceptedSpeedUnits[0];
                     } 
                 break;
                 case "cloud coverage":
                         correctUnitEntered = acceptedCloudCoverage.includes(givenUnit.toLowerCase());
                         if(correctUnitEntered === false){
-                            console.log("Incorrect unit value entered for wind/speed: " + givenType + " Setting to default: " + acceptedCloudCoverage[0])
+                            console.log("Incorrect unit value entered for wind/speed: " + givenUnit.toLowerCase() + " Setting to default: " + acceptedCloudCoverage[0])
                             return acceptedCloudCoverage[0];
                         } 
                 break;
@@ -62,14 +62,31 @@ const typeChecker = () => ({
 const temperatureConverter = state => ({
     convertToC() {  
         if(state.unit.toLowerCase() != "celsius"){
-            state.value = (state.value - 32) * 5 / 9;
-            state.unit = "Celsius"; 
+            if(state.value){
+                state.value = (state.value - 32) * 5 / 9;
+                state.unit = "Celsius"; 
+            }
+            else if(state.from && state.to){
+                state.from = (state.from - 32) * 5 / 9;
+                state.to = (state.to - 32) * 5 / 9;
+                state.unit = "Celsius"; 
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
         }
     },
     convertToF() {  
         if(state.unit.toLowerCase() != "fahrenheit"){
-        state.value = (state.value * 9/5) + 32;
-        state.unit = "Fahrenheit";           
+            if(state.value){
+                state.value = (state.value * 9/5) + 32;
+                state.unit = "Fahrenheit";      
+            }
+            else if(state.from && state.to){
+                state.from = (state.from * 9/5) + 32;
+                state.to = (state.to * 9/5) + 32;
+                state.unit = "Fahrenheit";      
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
+             
         }
     }  
 })
