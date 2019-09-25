@@ -245,7 +245,11 @@ test('WeatherHistory test', () => {
 
     let data1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
 
-    let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
+    let data2 = WeatherData(12,"Temperature","Celsius",date,"Vejle");
+
+    let dataArray = [data1,data2];
+
+    let weatherHistory1 = WeatherHistory(dataArray, "Horsens", "Temperature", dateInterval1);
 
 
     //place test
@@ -283,6 +287,11 @@ test('WeatherHistory test', () => {
     weatherHistory1.clearCurrentPeriod();
 
     expect(weatherHistory1.getCurrentPeriod()).toBe("");
+
+    weatherHistory1.convertToUSUnits();
+
+    expect(data1.value()).toBe((10 * 9/5) + 32);
+    expect(data1.unit()).toBe("Fahrenheit");
 
 
 })

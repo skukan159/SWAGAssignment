@@ -38,6 +38,7 @@ const WeatherData = (value,type,unit,time,place) => {
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
 
     return Object.assign({},
+        unitConverter(state),
         hasValue(state),
         hasEvent(state),
         hasDataType(state))
