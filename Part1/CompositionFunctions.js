@@ -51,30 +51,22 @@ const dateChecker = state => ({
     to() { return state.to},
     contains(date) { return state.from <= date && state.to >= date }
 })
-const timeGetter = state => ({
-    time() { return state.time}
-})
-const placeGetter = state => ({
+const hasEvent = state => ({
+    time() { return state.time},
     place() { return state.place}
 })
 
 //An example of alternative way composition
 //functions could be written
-const timeGetter2 = time => ({
-    time() { return time}
-})
-const placeGetter2 = place => ({
+const hasEvent2 = (time,place) => ({
+    time() { return time},
     place() { return place}
 })
-
-const typeGetter = state => ({
-    type() { return state.type }
-}) 
-const unitGetter = state => ({
+const hasDataType = (state) => ({
+    type() { return state.type },
     unit() { return state.unit }
 })
-
-const valueGetter = state => ({
+const hasValue = state => ({
     value() { return state.value }
 })
 
@@ -115,24 +107,26 @@ const weatherDataComparator = (state) => ({
     to(){ return state.to},
     matches(weatherData)
     { 
-        if(state.type === weatherData.type &&
-             state.unit === weatherData.unit)
+        if(state.type.toLowerCase() === weatherData.type.toLowerCase() &&
+             state.unit.toLowerCase() === weatherData.unit.toLowerCase() &&
+             state.time.getDate() === weatherData.time.getDate())
             {
                 if(weatherData.value >= state.from &&
                      weatherData.value <= state.to){
-                    return true
-                } else return false;
-            }  
+                    return true;
+                } 
+            }
+            return false;  
     }
 })
 
-const hasPlace = (state) => ({
+const hasCurrentPlace = (state) => ({
     getCurrentPlace() { return state.place },
     setCurrentPlace(place) { state.place = place },
     clearCurrentPlace() { state.place = "" }
 })
 
-const hasType = (state) => ({
+const hasCurrentType = (state) => ({
     getCurrentType() { return state.type},
     setCurrentType(type) { state.type = type },
     clearCurrentType() { state.type = "" }  
@@ -174,11 +168,11 @@ const hasWeatherData = state => ({
     }
 })
 
-module.exports = { dateChecker,timeGetter,placeGetter,typeGetter,
-    unitGetter,valueGetter,precipitationTypeGetter,precipitationTypesGetter,
+module.exports = { dateChecker,hasEvent,hasDataType,
+    hasValue,precipitationTypeGetter,precipitationTypesGetter,
     windDirectionsGetter,directionGetter,weatherDataComparator,
-    hasPlace,hasType,hasCurrentPeriod,hasWeatherData,
-    timeGetter2,placeGetter2,unitConverter }
+    hasCurrentPlace,hasCurrentType,hasCurrentPeriod,hasWeatherData,
+    hasEvent2,unitConverter }
 
 
 
