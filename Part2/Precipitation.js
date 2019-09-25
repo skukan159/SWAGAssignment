@@ -1,8 +1,10 @@
 const { WeatherData } = require("./WeatherData");
 
 class Precipitation extends WeatherData {
-    constructor(...args){
-        super(args)
+    constructor(precipitationType,valueV, unit ,time, place){
+        this.precipitationType = precipitationType;
+        let type = "Precipitation";
+        super(valueV, type, unit ,time, place);
     }
     
     precipitationType(){ return state.pricipitationType }
