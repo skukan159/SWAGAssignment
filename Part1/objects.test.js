@@ -164,56 +164,80 @@ test('Temperature prediction test', () => {
     let date = new Date();
     let temperaturePredictionData = TemperaturePrediction(10,15,"Celsius",date,"Horsens");
 
-    expect(temperaturePredictionData.from()).toBe(10);
-    expect(temperaturePredictionData.to()).toBe(15);
-    expect(temperaturePredictionData.time()).toBe(date);
-    expect(temperaturePredictionData.place()).toBe("Horsens");
-    expect(temperaturePredictionData.type()).toBe("Temperature");
-    expect(temperaturePredictionData.unit()).toBe("Celsius");
+        temperaturePredictionData.convertToInternational();
+        expect(temperaturePredictionData.from()).toBe(10);
+        expect(temperaturePredictionData.to()).toBe(15);
+        expect(temperaturePredictionData.unit()).toBe("Celsius");
+    })
 
-    temperaturePredictionData.convertToUS();
-    expect(temperaturePredictionData.from()).toBe((10 * 9/5) + 32);
-    expect(temperaturePredictionData.to()).toBe((15 * 9/5) + 32);
-    expect(temperaturePredictionData.unit()).toBe("Fahrenheit");
+    test('PrecipitationPrediction test', () => {
+        let date = new Date();
+        let precipitation1 = Precipitation("samplePrecType",7,"mm",date,"Horsens");
 
-    temperaturePredictionData.convertToInternational();
-    expect(temperaturePredictionData.from()).toBe(10);
-    expect(temperaturePredictionData.to()).toBe(15);
-    expect(temperaturePredictionData.unit()).toBe("Celsius");
-})
-/*
-test('PrecipitationPrediction test', () => {
-    let date = new Date();
-    let precipitationPrediction = PrecipitationPrediction(5,10,"samplePrecType","mm",date,"Horsens");
+        let precipitationPrediction = PrecipitationPrediction(5,10,"samplePrecType","mm",date,"Horsens");
 
-    expect(precipitationPrediction.from()).toBe(5);
-    expect(precipitationPrediction.time()).toBe(date);
-    expect(precipitationPrediction.place()).toBe("Horsens");
-    expect(precipitationPrediction.type()).toBe("Precipitation");
-    expect(precipitationPrediction.unit()).toBe("mm");
+        expect(precipitationPrediction.matches(precipitation1)).toBe(true)
+
+        expect(precipitationPrediction.from()).toBe(5);
+        expect(precipitationPrediction.time()).toBe(date);
+        expect(precipitationPrediction.place()).toBe("Horsens");
+        expect(precipitationPrediction.type()).toBe("Precipitation");
+        expect(precipitationPrediction.unit()).toBe("mm");
 
     precipitationPrediction.convertToUS();
     expect(precipitationPrediction.from()).toBe(5/25.4);
     expect(precipitationPrediction.to()).toBe(10/25.4);
     expect(precipitationPrediction.unit()).toBe("Inches");
 
-    precipitationPrediction.convertToInternational();
-    expect(precipitationPrediction.from()).toBe(5);
-    expect(precipitationPrediction.to()).toBe(10);
-    expect(precipitationPrediction.unit()).toBe("MM");
-})*/
+        precipitationPrediction.convertToInternational();
+        expect(precipitationPrediction.from()).toBe(5);
+        expect(precipitationPrediction.to()).toBe(10);
+        expect(precipitationPrediction.unit()).toBe("MM");
+    })
 
 test('WindPrediction test', () => {
     let date = new Date();
 
-    let wind = WindPrediction(5,10,"NE","MS",date,"Horsens");
+        let wind1 = Wind("NE",7,"MS",date,"Horsens");
 
-    expect(wind.from()).toBe(5);
-    expect(wind.to()).toBe(10);
-    expect(wind.time()).toBe(date);
-    expect(wind.place()).toBe("Horsens");
-    expect(wind.unit()).toBe("MS");
+        let wind = WindPrediction(5,10,"NE","MS",date,"Horsens");
+
+        expect(wind.matches(wind1)).toBe(true);
+        expect(wind.from()).toBe(5);
+        expect(wind.to()).toBe(10);
+        expect(wind.time()).toBe(date);
+        expect(wind.place()).toBe("Horsens");
+        expect(wind.unit()).toBe("MS");
 
 })
 
+    test('CloudCoveragePrediction test', () => {
+        let date = new Date();
+        let cloudCoverage = CloudCoverage(10,"okta",date,"Horsens");
 
+        expect(cloudCoverage.value()).toBe(10);
+        expect(cloudCoverage.time()).toBe(date);
+        expect(cloudCoverage.place()).toBe("Horsens");
+        expect(cloudCoverage.type()).toBe("Cloud Coverage");
+        expect(cloudCoverage.unit()).toBe("okta");
+    })
+
+    test('WeatherHistory test', () => {
+        let date = new Date();
+
+        let fromDate = new Date();
+        fromDate.setFullYear(1996,11,18)
+        let toDate = new Date();
+        toDate.setFullYear(2000,22,12)
+
+        let dateInterval1 = DateInterval(fromDate,toDate);
+
+        let data1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
+
+        let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
+
+        expect(weatherHistory1.getCurrentPlace()).toBe("Horsens");
+    })
+
+
+    

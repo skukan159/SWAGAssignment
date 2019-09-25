@@ -235,15 +235,15 @@ const weatherDataComparator = (state) => ({
 })
 
 const hasCurrentPlace = (state) => ({
-    getCurrentPlace() { return state.place },
-    setCurrentPlace(place) { state.place = place },
-    clearCurrentPlace() { state.place = "" }
+    getCurrentPlace() { return state.currentPlace },
+    setCurrentPlace(place) { state.currentPlace = place },
+    clearCurrentPlace() { state.currentPlace = "" }
 })
 
 const hasCurrentType = (state) => ({
-    getCurrentType() { return state.type},
-    setCurrentType(type) { state.type = type },
-    clearCurrentType() { state.type = "" }  
+    getCurrentType() { return state.currentType},
+    setCurrentType(type) { state.type = currentType },
+    clearCurrentType() { state.currentType = "" }  
 })
 
 const hasCurrentPeriod = (state) => ({

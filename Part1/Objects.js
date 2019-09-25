@@ -168,9 +168,9 @@ const CloudCoveragePrediction = (from,to,unit,time,place) => {
 }
 
 const WeatherHistory = (weatherData,currentPlace,currentType,currentPeriod) => {
-    let state = { currentPlace,currentType,currentPeriod,weatherData }
+    let state = { weatherData, currentPlace,currentType,currentPeriod }
 
-    return Object,assign({},
+    return Object.assign({},
         hasCurrentPlace(state),
         hasCurrentType(state),
         hasCurrentPeriod(state),
