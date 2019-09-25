@@ -211,33 +211,30 @@ test('WindPrediction test', () => {
 
 })
 
-    test('CloudCoveragePrediction test', () => {
-        let date = new Date();
-        let cloudCoverage = CloudCoverage(10,"okta",date,"Horsens");
+test('CloudCoveragePrediction test', () => {
+    let date = new Date();
+    let cloudCoverage = CloudCoverage(10,"okta",date,"Horsens");
 
-        expect(cloudCoverage.value()).toBe(10);
-        expect(cloudCoverage.time()).toBe(date);
-        expect(cloudCoverage.place()).toBe("Horsens");
-        expect(cloudCoverage.type()).toBe("Cloud Coverage");
-        expect(cloudCoverage.unit()).toBe("okta");
-    })
+    expect(cloudCoverage.value()).toBe(10);
+    expect(cloudCoverage.time()).toBe(date);
+    expect(cloudCoverage.place()).toBe("Horsens");
+    expect(cloudCoverage.type()).toBe("Cloud Coverage");
+    expect(cloudCoverage.unit()).toBe("okta");
+})
 
-    test('WeatherHistory test', () => {
-        let date = new Date();
+test('WeatherHistory test', () => {
+    let date = new Date();
 
-        let fromDate = new Date();
-        fromDate.setFullYear(1996,11,18)
-        let toDate = new Date();
-        toDate.setFullYear(2000,22,12)
+    let fromDate = new Date();
+    fromDate.setFullYear(1996,11,18)
+    let toDate = new Date();
+    toDate.setFullYear(2000,22,12)
 
-        let dateInterval1 = DateInterval(fromDate,toDate);
+    let dateInterval1 = DateInterval(fromDate,toDate);
 
-        let data1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
+    let data1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
 
-        let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
+    let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
 
-        expect(weatherHistory1.getCurrentPlace()).toBe("Horsens");
-    })
-
-
-    
+    expect(weatherHistory1.getCurrentPlace()).toBe("Horsens");
+})
