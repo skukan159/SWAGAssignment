@@ -237,7 +237,7 @@ const hasCurrentPlace = (state) => ({
 
 const hasCurrentType = (state) => ({
     getCurrentType() { return state.currentType},
-    setCurrentType(type) { state.type = currentType },
+    setCurrentType(type) { state.currentType = type },
     clearCurrentType() { state.currentType = "" }  
 })
 

@@ -38,6 +38,7 @@ const WeatherData = (value,type,unit,time,place) => {
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
 
     return Object.assign({},
+        unitConverter(state),
         hasValue(state),
         hasEvent(state),
         hasDataType(state))
@@ -156,7 +157,7 @@ const WindPrediction = (from,to,directions,unit,time,place) => {
         unitConverter(state))
 }
 const CloudCoveragePrediction = (from,to,unit,time,place) => {
-    state = {from,to,weatherData,unit,type:"Cloud Coverage",time,place}
+    state = {from,to,unit,type:"Cloud Coverage",time,place}
 
     state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
