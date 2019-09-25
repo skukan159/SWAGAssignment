@@ -302,5 +302,13 @@ test('WeatherHistory test', () => {
 
     weatherHistory1.add(weatherData3);
 
+    weatherHistory1.setCurrentPlace("friv");
+    weatherHistory1.setCurrentType("Celsius");
+    weatherHistory1.setCurrentPeriod(dateInterval1);
 
+    expect(weatherHistory1.getCurrentPlace()).toBe("friv");
+    expect(weatherHistory1.getCurrentType()).toBe("Celsius");
+    expect(weatherHistory1.getCurrentPeriod()).toBe(dateInterval1);
+
+    expect(weatherHistory1.data()).toBe(dataArray);
 })
