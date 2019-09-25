@@ -3,6 +3,7 @@ const acceptedTypes = ["temperature","precipitation","wind","distance","speed","
 const acceptedTemperatureUnits = ["celsius","fahrenheit","c","f"]
 const acceptedSpeedUnits = ["mph","ms"]
 const acceptedDistanceUnits = ["inches","mm"]
+const acceptedCloudCoverage = ["inches","mm"]
 
 const typeChecker = () => ({
     checkIfCorrectTypeEntered(givenType)
@@ -38,6 +39,9 @@ const typeChecker = () => ({
                         console.log("Incorrect unit value entered for wind/speed. Setting to default: " + acceptedSpeedUnits[0])
                         return acceptedSpeedUnits[0];
                     } 
+                break;
+                case "cloud coverage":
+                    console.log("");
                 break;
             default: 
                 console.log("ERROR: Given unit not recognized");

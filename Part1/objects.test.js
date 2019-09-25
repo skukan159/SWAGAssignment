@@ -39,7 +39,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(dataType2.unit()).toBe("celsius");
     })
     
-    test('Date Interval tests', () => {
+  /*  test('Date Interval tests', () => {
         let fromDate = new Date();
         fromDate.setFullYear(1996,11,18)
         let toDate = new Date();
@@ -106,7 +106,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(precipitation.unit()).toBe("MM");
     })
 
-    test('Wind tests', () => {
+    /*test('Wind tests', () => {
         let date = new Date();
         let wind = Wind("NE",10,"MS",date,"Horsens");
 
@@ -123,9 +123,9 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         wind.convertToInternational();
         expect(wind.value()).toBe(10);
         expect(wind.unit()).toBe("MS");
-    })
+    })*/
 
-    test('CloudCoverage tests', () => {
+   /* test('CloudCoverage tests', () => {
         let date = new Date();
         let cloudCoverage = CloudCoverage(10,"Unknown",date,"Horsens");
 
@@ -136,25 +136,56 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(cloudCoverage.unit()).toBe("Unknown");
 
         
-    })
+    })*/
 
     /*test('TemperaturePrediction tests', () => {
         let tempPrediction = TemperaturePrediction()
     })*/
 
-    test('WeatherPrediction tests', () => {
+  /*  test('WeatherPrediction tests', () => {
         let date = new Date();
 
         let  weatherData1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
-        let  weatherData2 = WeatherData(6,"Temperature","Celsius",date,"Vejle");
+        let  weatherData2 = WeatherData(10,"Temperature","Celsius",date,"Vejle");
         let  weatherData3 = WeatherData(4,"Temperature","Celsius",date,"Skanderborg");
         let  weatherData4 = WeatherData(2,"Temperature","Celsius",date,"Horsens");
 
         let weatherPrediction = WeatherPrediction(5,15,"Temperature","Celsius",date,"Horsens");
- 
+        let weatherPrediction2 = WeatherPrediction(8,15,"Temperature","Celsius",date,"Vejle");
+
+        expect(weatherPrediction.matches(weatherData4)).toBe(false);
+        expect(weatherPrediction2.matches(weatherData1)).toBe(true);
+        expect(weatherPrediction2.matches(weatherData2)).toBe(true);
+        expect(weatherPrediction2.matches(weatherData3)).toBe(false);
+
+        expect(weatherPrediction.to()).toBe(15);
+        expect(weatherPrediction2.from()).toBe(8);
         
-        expect(weatherPrediction.matches(weatherData1)).toBe(true);
-    })
+    })*/
+
+    /*test('Temperature prediction test', () => {
+        let date = new Date();
+        let temperaturePredictionData = TemperaturePrediction(10,15,"Celsius",date,"Horsens");
+
+        expect(temperaturePredictionData.from()).toBe(10);
+        expect(temperaturePredictionData.to()).toBe(15);
+        expect(temperaturePredictionData.time()).toBe(date);
+        expect(temperaturePredictionData.place()).toBe("Horsens");
+        expect(temperaturePredictionData.type()).toBe("Temperature");
+        expect(temperaturePredictionData.unit()).toBe("Celsius");
+
+        temperaturePredictionData.convertToUS();
+        expect(temperaturePredictionData.from()).toBe((10 * 9/5) + 32);
+        expect(temperaturePredictionData.to()).toBe((15 * 9/5) + 32);
+        expect(temperaturePredictionData.unit()).toBe("Fahrenheit");
+
+        temperaturePredictionData.convertToInternational();
+        expect(temperaturePredictionData.from()).toBe(10);
+        expect(temperaturePredictionData.from()).toBe(15);
+        expect(temperaturePredictionData.unit()).toBe("Celsius");
+    })*/
+
+
 
     /*test('WeatherHistory tests', () => {
         let date = new Date();
