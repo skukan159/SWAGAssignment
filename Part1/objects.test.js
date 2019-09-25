@@ -159,6 +159,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         
     })
 
+    
     test('Temperature prediction test', () => {
         let date = new Date();
         let temperaturePredictionData = TemperaturePrediction(10,15,"Celsius",date,"Horsens");
