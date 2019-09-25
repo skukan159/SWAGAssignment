@@ -195,7 +195,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
        precipitationPrediction.convertToUS();
        expect(precipitationPrediction.from()).toBe(5/25.4);
        expect(precipitationPrediction.to()).toBe(10/25.4);
-        expect(precipitationPrediction.unit()).toBe("mm");
+        expect(precipitationPrediction.unit()).toBe("Inches");
 
         precipitationPrediction.convertToInternational();
         expect(precipitationPrediction.from()).toBe(5);

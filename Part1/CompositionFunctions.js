@@ -94,14 +94,32 @@ const temperatureConverter = state => ({
 const distanceConverter = state => ({
     convertToInches() {
         if(state.unit.toLowerCase() != "inches"){
-            state. value = state.value / 25.4;
-            state.unit = "Inches";  
+            if(state.value){
+                state.value = state.value / 25.4;
+                state.unit = "Inches";  
+            }
+            else if(state.from && state.to){
+                state.from = state.from / 25.4;
+                state.to = state.to / 25.4;
+                state.unit = "Inches";  
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
+            
         }   
     },
     convertToMM() { 
         if(state.unit.toLowerCase() != "mm"){
-            state.value = state.value * 25.4;
-            state.unit = "MM";   
+            if(state.value){
+                state.value = state.value * 25.4;
+                state.unit = "MM";   
+            }
+            else if(state.from && state.to){
+                state.from = state.from * 25.4;
+                state.to = state.to * 25.4;
+                state.unit = "MM";   
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
+            
         }
     }
 })
@@ -109,14 +127,32 @@ const distanceConverter = state => ({
 const speedConverter = state => ({
     convertToMPH() { 
         if(state.unit.toLowerCase() != "mph"){
-            state.value = state.value * 2.237;
-            state.unit = "MPH";
+            if(state.value){
+                state.value = state.value * 2.237;
+                state.unit = "MPH";
+            }
+            else if(state.from && state.to){
+                state.from = state.value * 2.237;
+                state.to = state.value * 2.237;
+                state.unit = "MPH"; 
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
+
         }
     },
     convertToMS() {
         if(state.unit.toLowerCase() != "ms"){
-            state.value = state.value / 2.237;
-            state.unit = "MS";
+            if(state.value){
+                state.value = state.value / 2.237;
+                state.unit = "MS";
+            }
+            else if(state.from && state.to){
+                state.from = state.value / 2.237;
+                state.to = state.value / 2.237;
+                state.unit = "MS";
+            }
+            else console.log("Error! Object does not contain value or from/to property.")
+
         }
     }
 })
