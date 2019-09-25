@@ -16,6 +16,8 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(event.place()).toBe("Horsens");
     })
 
+    // This is just a test of an example of a 
+    // different way to implement composition
     test('Event2 Object tests', () => {
         let date = new Date()
         let event = Event2(date,"Horsens");
