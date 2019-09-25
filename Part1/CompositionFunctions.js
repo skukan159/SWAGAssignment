@@ -3,14 +3,14 @@ const acceptedTypes = ["temperature","precipitation","wind","distance","speed","
 const acceptedTemperatureUnits = ["celsius","fahrenheit","c","f"]
 const acceptedSpeedUnits = ["mph","ms"]
 const acceptedDistanceUnits = ["inches","mm"]
-const acceptedCloudCoverage = ["inches","mm"]
+const acceptedCloudCoverage = ["okta"]
 
 const typeChecker = () => ({
     checkIfCorrectTypeEntered(givenType)
     { 
         let correctTypeEntered = acceptedTypes.includes(givenType.toLowerCase());
         if(correctTypeEntered === false){
-            console.log("Incorrect data type entered. Setting to default value which is: " + acceptedTypes[0])
+            console.log("Incorrect data type entered : " + givenType +". Setting to default value which is: " + acceptedTypes[0])
             givenType = acceptedTypes[0];
         }
         return givenType;
@@ -22,29 +22,35 @@ const typeChecker = () => ({
             case "temperature":
                     correctUnitEntered = acceptedTemperatureUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for temperature. Setting to default: " + acceptedTemperatureUnits[0])
+                        console.log("Incorrect unit value entered for temperature: " + givenType + " Setting to default: " + acceptedTemperatureUnits[0])
                         return acceptedTemperatureUnits[0];
                     } 
                 break;
-            case "precipitation" || "distance":
+            case "precipitation":
+            case "distance":
                     correctUnitEntered = acceptedDistanceUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for precipitation/distance. Setting to default: " + acceptedDistanceUnits[0])
+                        console.log("Incorrect unit value entered for precipitation/distance: " + givenType + " Setting to default: " + acceptedDistanceUnits[0])
                         return acceptedDistanceUnits[0];
                     } 
                 break;
-            case "wind" || "speed":
+            case "wind":
+            case "speed":
                     correctUnitEntered = acceptedSpeedUnits.includes(givenUnit.toLowerCase());
                     if(correctUnitEntered === false){
-                        console.log("Incorrect unit value entered for wind/speed. Setting to default: " + acceptedSpeedUnits[0])
+                        console.log("Incorrect unit value entered for wind/speed: " + givenType + " Setting to default: " + acceptedSpeedUnits[0])
                         return acceptedSpeedUnits[0];
                     } 
                 break;
                 case "cloud coverage":
-                    console.log("");
+                        correctUnitEntered = acceptedCloudCoverage.includes(givenUnit.toLowerCase());
+                        if(correctUnitEntered === false){
+                            console.log("Incorrect unit value entered for wind/speed: " + givenType + " Setting to default: " + acceptedCloudCoverage[0])
+                            return acceptedCloudCoverage[0];
+                        } 
                 break;
             default: 
-                console.log("ERROR: Given unit not recognized");
+                console.log("ERROR: Given type not recognized: " + givenType.toLowerCase());
                 break;
         }
             return givenUnit;
