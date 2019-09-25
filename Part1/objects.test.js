@@ -293,5 +293,14 @@ test('WeatherHistory test', () => {
     expect(data1.value()).toBe((10 * 9/5) + 32);
     expect(data1.unit()).toBe("Fahrenheit");
 
+    weatherHistory1.convertToInternationalUnits();
+
+    expect(data1.value()).toBe(10);
+    expect(data1.unit()).toBe("Celsius");
+
+    let weatherData3 = WeatherData(15,"Temperature", "Celsius", "friv");
+
+    weatherHistory1.add(weatherData3);
+
 
 })
