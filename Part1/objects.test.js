@@ -237,4 +237,12 @@ test('WeatherHistory test', () => {
     let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
 
     expect(weatherHistory1.getCurrentPlace()).toBe("Horsens");
+    
+    weatherHistory1.setCurrentPlace("vejle");
+    
+    expect(weatherHistory1.getCurrentPlace()).toBe("vejle");
+
+    weatherHistory1.clearCurrentPlace();
+
+    expect(weatherHistory1.getCurrentPlace()).toBe("");
 })
