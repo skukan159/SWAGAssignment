@@ -225,6 +225,7 @@ test('CloudCoveragePrediction test', () => {
 test('WeatherHistory test', () => {
     let date = new Date();
 
+
     let fromDate = new Date();
     fromDate.setFullYear(1996,11,18)
     let toDate = new Date();
@@ -232,9 +233,21 @@ test('WeatherHistory test', () => {
 
     let dateInterval1 = DateInterval(fromDate,toDate);
 
+    let fromDate2 = new Date();
+    fromDate.setFullYear(1998,11,18)
+    let toDate2 = new Date();
+    toDate.setFullYear(2001,22,12)
+
+    let dateInterval2 = DateInterval(fromDate2,toDate2);
+
+
+
     let data1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
 
     let weatherHistory1 = WeatherHistory(data1, "Horsens", "Temperature", dateInterval1);
+
+
+    //place test
 
     expect(weatherHistory1.getCurrentPlace()).toBe("Horsens");
     
@@ -245,4 +258,30 @@ test('WeatherHistory test', () => {
     weatherHistory1.clearCurrentPlace();
 
     expect(weatherHistory1.getCurrentPlace()).toBe("");
+
+    //type test
+
+    expect(weatherHistory1.getCurrentType()).toBe("Temperature");
+
+    weatherHistory1.setCurrentType("vejle");
+    
+    expect(weatherHistory1.getCurrentType()).toBe("vejle");
+
+    weatherHistory1.clearCurrentType();
+
+    expect(weatherHistory1.getCurrentType()).toBe("");
+
+    //period test
+
+    expect(weatherHistory1.getCurrentPeriod()).toBe(dateInterval1);
+
+    weatherHistory1.setCurrentPeriod(dateInterval2);
+
+    expect(weatherHistory1.getCurrentPeriod()).toBe(dateInterval2);
+
+    weatherHistory1.clearCurrentPeriod();
+
+    expect(weatherHistory1.getCurrentPeriod()).toBe("");
+
+
 })
