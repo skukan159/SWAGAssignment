@@ -1,4 +1,54 @@
 
+const acceptedTypes = ["temperature","precipitation","wind","distance","speed"]
+const acceptedTemperatureUnits = ["celsius","fahrenheit","c","f"]
+const acceptedSpeedUnits = ["mph","ms"]
+const acceptedDistanceUnits = ["inches","mm"]
+
+const typeChecker = () => ({
+    checkIfCorrectTypeEntered(givenType)
+    { 
+        let correctTypeEntered = acceptedTypes.includes(givenType.toLowerCase());
+        if(correctTypeEntered === false){
+            console.log("Incorrect data type entered. Setting to default value which is: " + acceptedTypes[0])
+            givenType = acceptedTypes[0];
+        }
+        return givenType;
+    },
+    checkIfCorrectUnitEntered(givenType,givenUnit)
+    { 
+        let correctUnitEntered = false;
+        switch(givenType.toLowerCase()){
+            case "temperature":
+                    correctUnitEntered = acceptedTemperatureUnits.includes(givenUnit.toLowerCase());
+                    if(correctUnitEntered === false){
+                        console.log("Incorrect unit value entered for temperature. Setting to default: " + acceptedTemperatureUnits[0])
+                        return acceptedTemperatureUnits[0];
+                    } 
+                break;
+            case "precipitation" || "distance":
+                    correctUnitEntered = acceptedDistanceUnits.includes(givenUnit.toLowerCase());
+                    if(correctUnitEntered === false){
+                        console.log("Incorrect unit value entered for precipitation/distance. Setting to default: " + acceptedDistanceUnits[0])
+                        return acceptedDistanceUnits[0];
+                    } 
+                break;
+            case "wind" || "speed":
+                    correctUnitEntered = acceptedSpeedUnits.includes(givenUnit.toLowerCase());
+                    if(correctUnitEntered === false){
+                        console.log("Incorrect unit value entered for wind/speed. Setting to default: " + acceptedSpeedUnits[0])
+                        return acceptedSpeedUnits[0];
+                    } 
+                break;
+            default: 
+                console.log("ERROR: Given unit not recognized");
+                break;
+        }
+            return givenUnit;
+        
+    }
+})
+
+
 const temperatureConverter = state => ({
     convertToC() {  
         if(state.unit.toLowerCase() != "celsius"){
@@ -63,6 +113,7 @@ const hasEvent2 = (time,place) => ({
     place() { return place}
 })
 const hasDataType = (state) => ({
+    
     type() { return state.type },
     unit() { return state.unit }
 })
@@ -172,7 +223,7 @@ module.exports = { dateChecker,hasEvent,hasDataType,
     hasValue,precipitationTypeGetter,precipitationTypesGetter,
     windDirectionsGetter,directionGetter,weatherDataComparator,
     hasCurrentPlace,hasCurrentType,hasCurrentPeriod,hasWeatherData,
-    hasEvent2,unitConverter }
+    hasEvent2,unitConverter,typeChecker }
 
 
 

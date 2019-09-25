@@ -2,7 +2,10 @@ const {dateChecker,hasEvent,hasDataType,
     hasValue,precipitationTypeGetter,precipitationTypesGetter,
     windDirectionsGetter,directionGetter,weatherDataComparator,
     hasCurrentPlace,hasCurrentType,hasCurrentPeriod,hasWeatherData,
-    hasEvent2,unitConverter}  = require('./CompositionFunctions')
+    hasEvent2,unitConverter,typeChecker}  = require('./CompositionFunctions')
+
+const myTypeChecker = Object.assign({},typeChecker())
+
 
 const DateInterval = (from,to) => {
     state = {from,to}
@@ -21,6 +24,10 @@ const Event2 = (time,place) => {
 
 const DataType = (type,unit) => {
     state = {type,unit}
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},hasDataType(state))
 }
 
@@ -86,17 +93,17 @@ const WeatherPrediction = (from,to,unit,type,time,place) => {
 }
 
 const TemperaturePrediction = (from,to,unit,time,place) => {
-    state = {unit,type:"Temperature",time,place}
+    state = {from,to,unit,type:"Temperature",time,place}
     return Object.assign({},
         hasEvent(state),
-        hasDataType(state), 
-        unitConverter(state),
-        weatherDataComparator(state))
+        hasDataType(state),
+        weatherDataComparator(state),
+        unitConverter(state))
 }
 
 
-const PrecipitationPrediction = (types,unit,time,place) => {
-    state = {types,unit,type:"Precipitation",time,place}
+const PrecipitationPrediction = (from,to,types,unit,time,place) => {
+    state = {from,to,types,unit,type:"Precipitation",time,place}
     return Object.assign({},
         hasEvent(state),
         hasDataType(state),
@@ -105,26 +112,26 @@ const PrecipitationPrediction = (types,unit,time,place) => {
         weatherDataComparator(state))
 }
 
-const WindPrediction = (directions,unit,time,place) => {
-    state = { directions,weatherData,unit,type:"Wind",time,place}
+const WindPrediction = (from,to,directions,unit,time,place) => {
+    state = { from,to,directions,weatherData,unit,type:"Wind",time,place}
 
     return Object.assign({},
+        hasEvent(state),
+        hasDataType(state),
         windDirectionsGetter(state),
         weatherDataComparator(state),
-        unitConverter(state),
-        hasEvent(state),
-        hasDataType(state))
+        unitConverter(state))
 }
-const CloudCoveragePrediction = (unit,time,place) => {
-    state = {weatherData,unit,type:"Cloud Coverage",time,place}
+const CloudCoveragePrediction = (from,to,unit,time,place) => {
+    state = {from,to,weatherData,unit,type:"Cloud Coverage",time,place}
     return Object.assign({},
         weatherDataComparator(state),
         hasEvent(state),   
         hasDataType(state))
 }
 
-const WeatherHistory = (weatherData,place,type,currentPeriod) => {
-    let state = { place,type,currentPeriod,weatherData }
+const WeatherHistory = (weatherData,currentPlace,currentType,currentPeriod) => {
+    let state = { currentPlace,currentType,currentPeriod,weatherData }
 
     return Object,assign({},
         hasCurrentPlace(state),

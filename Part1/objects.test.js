@@ -31,6 +31,12 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
 
         expect(dataType.type()).toBe("Distance");
         expect(dataType.unit()).toBe("mm");
+
+        let dataType2 = DataType("Johhny","Johnson");
+        expect(dataType2.type()).not.toBe("Johnny");
+        expect(dataType2.unit()).not.toBe("Johnson");
+        expect(dataType2.type()).toBe("temperature");
+        expect(dataType2.unit()).toBe("celsius");
     })
     
     test('Date Interval tests', () => {
