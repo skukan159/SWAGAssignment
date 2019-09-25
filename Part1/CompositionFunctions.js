@@ -1,3 +1,51 @@
+
+const temperatureConverter = state => ({
+    convertToC() {  
+        if(state.unit.toLowerCase() != "celsius"){
+            state.value = (state.value - 32) * 5 / 9;
+            state.unit = "Celsius"; 
+        }
+    },
+    convertToF() {  
+        if(state.unit.toLowerCase() != "fahrenheit"){
+        state.value = (state.value * 9/5) + 32;
+        state.unit = "Fahrenheit";           
+        }
+    }  
+})
+
+const distanceConverter = state => ({
+    convertToInches() {
+        if(state.unit.toLowerCase() != "inches"){
+            state. value = state.value / 25.4;
+            state.unit = "Inches";  
+        }   
+    },
+    convertToMM() { 
+        if(state.unit.toLowerCase() != "mm"){
+            state.value = state.value * 25.4;
+            state.unit = "MM";   
+        }
+    }
+})
+
+const speedConverter = state => ({
+    convertToMPH() { 
+        if(state.unit.toLowerCase() != "mph"){
+            state.value = state.value * 2.237;
+            state.unit = "MPH";
+        }
+    },
+    convertToMS() {
+        if(state.unit.toLowerCase() != "ms"){
+            state.value = state.value / 2.237;
+            state.unit = "MS";
+        }
+    }
+})
+
+
+
 const dateChecker = state => ({
     from() { return state.from },
     to() { return state.to},
@@ -10,6 +58,8 @@ const placeGetter = state => ({
     place() { return state.place}
 })
 
+//An example of alternative way composition
+//functions could be written
 const timeGetter2 = time => ({
     time() { return time}
 })
@@ -28,16 +78,20 @@ const valueGetter = state => ({
     value() { return state.value }
 })
 
-const temperatureConverter = state => ({
-    convertToF(){ 
-        state.value = (state.value * 9/5) + 32;
-        state.unit = "Fahrenheit";                 
-    },
-    convertToC(){ 
-        state.value = (state.value - 32) * 5 / 9;
-        state.unit = "Celsius"; 
-    }
+const unitConverter = state => ({
+    convertToUS() {
+        if(state.type.toLowerCase() === "temperature"){ temperatureConverter(state).convertToF() }
+        if(state.type.toLowerCase() === "precipitation"){ distanceConverter(state).convertToInches() }
+        if(state.type.toLowerCase() === "wind"){ speedConverter(state).convertToMPH() }
+    }, 
+    convertToInternational() { 
+        if(state.type.toLowerCase() === "temperature"){ temperatureConverter(state).convertToC() }
+        if(state.type.toLowerCase() === "precipitation"){ distanceConverter(state).convertToMM() }
+        if(state.type.toLowerCase() === "wind"){ speedConverter(state).convertToMS() }
+     } 
 })
+
+
 
 const precipitationTypeGetter = (state) => ({
     precipitationType(){ return state.pricipitationType }
@@ -46,27 +100,8 @@ const precipitationTypesGetter = (state) => ({
     types(){ return state.types }
 }) 
 
-const mmInchConverter = (state) => ({
-    convertToInches() { 
-        state. value = state.value / 25.4;
-        state.unit = "Inches";      
-    },
-    convertToMM(){ 
-        state.value = state.value * 25.4;
-        state.unit = "MM";       
-    }
-})
 
-const msMPHConverter = (state) => ({
-    convertToMPH() { 
-        state.value = state.value * 2.237;
-        state.unit = "MPH"; 
-     },
-    convertToMS() {
-         state.value = state.value / 2.237;
-         state.unit = "MS"; 
-         }
-})
+
 
 const directionGetter = (state) => ({
     direction(){ return state.direction }
@@ -109,22 +144,41 @@ const hasCurrentPeriod = (state) => ({
     clearCurrentPeriod() { state.currentPeriod = "" }  
 })
 //TODO
-const unitsConverter = (state) => ({
-    convertToUSUnits() {  },
-    convertToInternationalUnits() {  },
-})
+
 
 const hasWeatherData = state => ({
     add(weatherData){ state.weatherData = weatherData },
-    data() { return state.weatherData}
+    convertToUSUnits() { 
+        state.weatherData.forEach(weatherDataObj => {
+            weatherDataObj.convertToUS()
+        });
+    },
+    
+    convertToInternationalUnits() {
+        state.weatherData.forEach(weatherDataObj => {
+            weatherDataObj.convertToInternational()
+        });
+    },
+
+    data() 
+    { 
+        return state.weatherData.filter((weatherDataObj) => 
+        {
+            if((weatherDataComparator.type === state.type || state.type === "")
+                && (weatherDataComparator.place === state.place || state.place === "")
+                && (state.currentPeriod.contains(weatherDataComparator.time) === state.type || state.currentPeriod === ""))
+                {
+                    return weatherDataObj;
+                }
+        })      
+    }
 })
 
 module.exports = { dateChecker,timeGetter,placeGetter,typeGetter,
-    unitGetter,valueGetter,temperatureConverter,
-    precipitationTypeGetter,precipitationTypesGetter,windDirectionsGetter,
-    mmInchConverter,msMPHConverter,directionGetter,weatherDataComparator,
-    hasPlace,hasType,hasCurrentPeriod,unitsConverter,hasWeatherData,
-    timeGetter2,placeGetter2 }
+    unitGetter,valueGetter,precipitationTypeGetter,precipitationTypesGetter,
+    windDirectionsGetter,directionGetter,weatherDataComparator,
+    hasPlace,hasType,hasCurrentPeriod,hasWeatherData,
+    timeGetter2,placeGetter2,unitConverter }
 
 
 

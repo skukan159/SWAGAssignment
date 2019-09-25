@@ -70,11 +70,11 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(temperatureData.type()).toBe("Temperature");
         expect(temperatureData.unit()).toBe("Celsius");
 
-        temperatureData.convertToF();
+        temperatureData.convertToUS();
         expect(temperatureData.value()).toBe((10 * 9/5) + 32);
         expect(temperatureData.unit()).toBe("Fahrenheit");
 
-        temperatureData.convertToC();
+        temperatureData.convertToInternational();
         expect(temperatureData.value()).toBe(10);
         expect(temperatureData.unit()).toBe("Celsius");
     })
@@ -89,11 +89,11 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(precipitation.type()).toBe("Precipitation");
         expect(precipitation.unit()).toBe("mm");
 
-        precipitation.convertToInches();
+        precipitation.convertToUS();
         expect(precipitation.value()).toBe(10/25.4);
         expect(precipitation.unit()).toBe("Inches");
 
-        precipitation.convertToMM();
+        precipitation.convertToInternational();
         expect(precipitation.value()).toBe(10);
         expect(precipitation.unit()).toBe("MM");
     })
@@ -108,11 +108,11 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(wind.type()).toBe("Wind");
         expect(wind.unit()).toBe("MS");
 
-        wind.convertToMPH();
+        wind.convertToUS();
         expect(wind.value()).toBe(10 * 2.237);
         expect(wind.unit()).toBe("MPH");
 
-        wind.convertToMS();
+        wind.convertToInternational();
         expect(wind.value()).toBe(10);
         expect(wind.unit()).toBe("MS");
     })
@@ -145,7 +145,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(weatherPrediction.matches(testMatchesPrediction)).toBe(true);
     })*/
 
-    test('WeatherHistory tests', () => {
+    /*test('WeatherHistory tests', () => {
         let date = new Date();
         let testWeatherData2 = new WeatherData(10,"Temperature2","Cels234ius",date,"Horsens2");
         let testWeatherData = new WeatherData(10,"Temperature4","Cels234ius",date,"Horsens3");
@@ -154,4 +154,4 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         
     })
 
-    
+    */

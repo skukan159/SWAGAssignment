@@ -1,9 +1,8 @@
 const {dateChecker,timeGetter,placeGetter,typeGetter,unitGetter,
-    valueGetter,temperatureConverter,precipitationTypeGetter,
-    precipitationTypesGetter,windDirectionsGetter,
-    mmInchConverter,msMPHConverter,directionGetter,weatherDataComparator,
-    hasPlace,hasType,hasCurrentPeriod,unitsConverter,hasWeatherData,
-    timeGetter2,placeGetter2}  = require('./CompositionFunctions')
+    valueGetter,precipitationTypeGetter,precipitationTypesGetter,
+    windDirectionsGetter,directionGetter,weatherDataComparator,
+    hasPlace,hasType,hasCurrentPeriod,hasWeatherData,
+    timeGetter2,placeGetter2,unitConverter}  = require('./CompositionFunctions')
 
 const DateInterval = (from,to) => {
     state = {from,to}
@@ -29,7 +28,7 @@ const WeatherData = (value,type,unit,time,place) => {
     return Object.assign({},
         valueGetter(state),
         timeGetter(state),
-        placeGetter(state),    
+        placeGetter(state),
         typeGetter(state),
         unitGetter(state))
 }
@@ -39,7 +38,8 @@ const Temperature = (value,unit,time,place) => {
     let state = { value,unit,type:"Temperature",time,place }
 
     return Object.assign({},
-        temperatureConverter(state),
+        //temperatureConverter(state),
+        unitConverter(state),
         valueGetter(state),
         timeGetter(state),
         placeGetter(state),    
@@ -52,7 +52,8 @@ const Precipitation = (pricipitationType,value,unit,time,place) => {
 
     return Object.assign({},
         precipitationTypeGetter(state),
-        mmInchConverter(state),
+        //mmInchConverter(state),
+        unitConverter(state),
         valueGetter(state),
         timeGetter(state),
         placeGetter(state),    
@@ -67,7 +68,8 @@ const Wind =  (direction,value,unit,time,place) => {
     }
 
     return Object.assign({},
-        msMPHConverter(state),
+        //msMPHConverter(state),
+        unitConverter(state),
         directionGetter(state),
         valueGetter(state),
         timeGetter(state),
@@ -103,7 +105,7 @@ const WeatherPrediction = (unit,type,time,place) => {
 const TemperaturePrediction = (unit,time,place) => {
     state = {unit,type:"Temperature",time,place}
     return Object.assign({}, 
-        temperatureConverter(state),
+        unitConverter(state),
         timeGetter(state),
         placeGetter(state),
         typeGetter(state),
@@ -114,8 +116,9 @@ const TemperaturePrediction = (unit,time,place) => {
 const PrecipitationPrediction = (types,unit,time,place) => {
     state = {types,unit,type:"Precipitation",time,place}
     return Object.assign({},
-        mmInchConverter(state),
+        //mmInchConverter(state),
         precipitationTypesGetter(state),
+        unitConverter(state),
         timeGetter(state),
         placeGetter(state),    
         typeGetter(state),
@@ -128,6 +131,7 @@ const WindPrediction = (directions,unit,time,place) => {
     return Object.assign({},
         windDirectionsGetter(state),
         weatherDataComparator(state),
+        unitConverter(state),
         timeGetter(state),
         placeGetter(state),    
         typeGetter(state),
@@ -150,7 +154,6 @@ const WeatherHistory = (weatherData,place,type,currentPeriod) => {
         hasPlace(state),
         hasType(state),
         hasCurrentPeriod(state),
-        unitsConverter(state),
         hasWeatherData(state))
 }
 //Not Needed
