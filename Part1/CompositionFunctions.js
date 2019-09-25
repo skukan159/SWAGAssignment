@@ -158,12 +158,12 @@ const weatherDataComparator = (state) => ({
     to(){ return state.to},
     matches(weatherData)
     { 
-        if(state.type.toLowerCase() === weatherData.type.toLowerCase() &&
-             state.unit.toLowerCase() === weatherData.unit.toLowerCase() &&
-             state.time.getDate() === weatherData.time.getDate())
+        if(state.type.toLowerCase() === weatherData.type().toLowerCase() &&
+             state.unit.toLowerCase() === weatherData.unit().toLowerCase() &&
+             state.time.getDate() === weatherData.time().getDate())
             {
-                if(weatherData.value >= state.from &&
-                     weatherData.value <= state.to){
+                if(weatherData.value() >= state.from &&
+                     weatherData.value() <= state.to){
                     return true;
                 } 
             }

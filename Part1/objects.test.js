@@ -142,20 +142,19 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         let tempPrediction = TemperaturePrediction()
     })*/
 
-  /*  test('WeatherPrediction tests', () => {
+    test('WeatherPrediction tests', () => {
         let date = new Date();
 
-        let toNumber = new Number(5);
-        let fromNumber = new Number(10);
+        let  weatherData1 = WeatherData(10,"Temperature","Celsius",date,"Horsens");
+        let  weatherData2 = WeatherData(6,"Temperature","Celsius",date,"Vejle");
+        let  weatherData3 = WeatherData(4,"Temperature","Celsius",date,"Skanderborg");
+        let  weatherData4 = WeatherData(2,"Temperature","Celsius",date,"Horsens");
 
-        let testMatchesPrediction = new WeatherData();
-        weatherData = (10,"Temperature","Celsius",date,"Horsens");
-
-        let weatherPrediction = WeatherPrediction(weatherData,"Unknown", date, "Horsens");
+        let weatherPrediction = WeatherPrediction(5,15,"Temperature","Celsius",date,"Horsens");
  
         
-        expect(weatherPrediction.matches(testMatchesPrediction)).toBe(true);
-    })*/
+        expect(weatherPrediction.matches(weatherData1)).toBe(true);
+    })
 
     /*test('WeatherHistory tests', () => {
         let date = new Date();
