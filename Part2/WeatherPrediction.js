@@ -21,8 +21,8 @@ WeatherPrediction.prototype.matches = function matches(weatherDataObj)
         this.unit.toLowerCase() === weatherDataObj.unit().toLowerCase() &&
         this.time.getDate() === weatherDataObj.time().getDate())
     {
-        if(weatherDataObj.value() >= this.from &&
-        weatherDataObj.value() <= this.to){
+        if(weatherDataObj.value() >= this.from && weatherDataObj.value() <= this.to)
+        {
             return true;
         } 
     }   

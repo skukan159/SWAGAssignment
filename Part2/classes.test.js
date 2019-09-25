@@ -2,7 +2,7 @@ const { Event } = require('./Event'); //import Event from './Event'
 const { DataType } = require('./DataType')//import DataType from './DataType'
 const { DateInterval } = require('./DateInterval')//import WeatherData from './WeatherData'
 const { WeatherData } = require('./WeatherData')
-
+const { Temperature } = require('./Temperature')
 
 test('Test of my test runner', () => {
     expect(1+1).toBe(2)
@@ -51,4 +51,24 @@ test('WeatherData tests', () => {
     expect(weatherData.type()).toBe("Temperature");
     expect(weatherData.unit()).toBe("Celsius");
 })
+
+test('Temperature tests', () => {
+    let date = new Date();
+    let temperatureData = new Temperature(10,"Celsius",date,"Horsens");
+
+    expect(temperatureData.value()).toBe(10);
+    expect(temperatureData.time()).toBe(date);
+    expect(temperatureData.place()).toBe("Horsens");
+    expect(temperatureData.type()).toBe("Temperature");
+    expect(temperatureData.unit()).toBe("Celsius");
+
+    temperatureData.convertToF();
+    expect(temperatureData.value()).toBe((10 * 9/5) + 32);
+    expect(temperatureData.unit).toBe("Fahrenheit");
+
+    temperatureData.convertToC();
+    expect(temperatureData.value()).toBe(10);
+    expect(temperatureData.unit).toBe("Celsius");
+})
+
 
