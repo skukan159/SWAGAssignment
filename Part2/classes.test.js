@@ -3,6 +3,9 @@ const { DataType } = require('./DataType')//import DataType from './DataType'
 const { DateInterval } = require('./DateInterval')//import WeatherData from './WeatherData'
 const { WeatherData } = require('./WeatherData')
 const { Temperature } = require('./Temperature')
+const { Precipitation } = require('./Precipitation')
+const { Wind } = require('./Wind')
+const { CloudCoverage } = require('./CloudCoverage')
 
 test('Test of my test runner', () => {
     expect(1+1).toBe(2)
@@ -64,11 +67,61 @@ test('Temperature tests', () => {
 
     temperatureData.convertToF();
     expect(temperatureData.value()).toBe((10 * 9/5) + 32);
-    expect(temperatureData.unit).toBe("Fahrenheit");
+    expect(temperatureData.unit()).toBe("Fahrenheit");
 
     temperatureData.convertToC();
     expect(temperatureData.value()).toBe(10);
-    expect(temperatureData.unit).toBe("Celsius");
+    expect(temperatureData.unit()).toBe("Celsius");
+})
+
+test('Precipitation tests', () => {
+    let date = new Date();
+    let precipitation = new Precipitation("samplePrecType",10,"mm",date,"Horsens");
+
+    expect(precipitation.value()).toBe(10);
+    expect(precipitation.time()).toBe(date);
+    expect(precipitation.place()).toBe("Horsens");
+    expect(precipitation.type()).toBe("Precipitation");
+    expect(precipitation.unit()).toBe("mm");
+
+    precipitation.convertToInches();
+    expect(precipitation.value()).toBe(10/25.4);
+    expect(precipitation.unit()).toBe("Inches");
+
+    precipitation.convertToMM();
+    expect(precipitation.value()).toBe(10);
+    expect(precipitation.unit()).toBe("MM");
 })
 
 
+test('Wind tests', () => {
+    let date = new Date();
+    let wind = new Wind("NE",10,"MS",date,"Horsens");
+
+    expect(wind.value()).toBe(10);
+    expect(wind.time()).toBe(date);
+    expect(wind.place()).toBe("Horsens");
+    expect(wind.type()).toBe("Wind");
+    expect(wind.unit()).toBe("MS");
+
+    wind.convertToMPH();
+    expect(wind.value()).toBe(10 * 2.237);
+    expect(wind.unit()).toBe("MPH");
+
+    wind.convertToMS();
+    expect(wind.value()).toBe(10);
+    expect(wind.unit()).toBe("MS");
+})
+
+test('CloudCoverage tests', () => {
+    let date = new Date();
+    let cloudCoverage = new CloudCoverage(10,"okta",date,"Horsens");
+
+    expect(cloudCoverage.value()).toBe(10);
+    expect(cloudCoverage.time()).toBe(date);
+    expect(cloudCoverage.place()).toBe("Horsens");
+    expect(cloudCoverage.type()).toBe("Cloud Coverage");
+    expect(cloudCoverage.unit()).toBe("okta");
+
+    
+})

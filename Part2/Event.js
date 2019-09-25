@@ -1,12 +1,9 @@
-function Event(timeValue, placeValue) {
-    this.timeValue = timeValue
-    this.placeValue = placeValue
+function Event(timeVal, placeVal) {
+    this.timeVal = timeVal
+    this.placeVal = placeVal
 }
 
-Event.prototype.time = function() { return this.timeValue }
-Event.prototype.place = function() { return this.placeValue }
-
-
-
+Event.prototype.time = function() { return this.timeVal }
+Event.prototype.place = function() { return this.placeVal }
 
 module.exports = { Event }

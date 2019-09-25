@@ -1,15 +1,15 @@
 const { WeatherData } = require("./WeatherData");
 
 class Precipitation extends WeatherData {
-    constructor(precipitationType,valueV, unit ,time, place){
-        this.precipitationType = precipitationType;
-        let type = "Precipitation";
-        super(valueV, type, unit ,time, place);
+    constructor(precipitationTypeVal,valueVal, unitVal ,timeVal, placeVal){
+        let typeVal = "Precipitation";
+        super(valueVal, typeVal, unitVal ,timeVal, placeVal);
+        this.precipitationTypeVal = precipitationTypeVal;
     }
     
-    precipitationType(){ return state.pricipitationType }
-    convertToInches() { this.value / 25.4; this.unit = "Inches" }
-    convertToMM(){ this.value * 25.4; this.unit = "MM" }
+    precipitationType(){ return state.precipitationTypeVal }
+    convertToInches() { this.valueVal = this.valueVal / 25.4; this.unitVal = "Inches" }
+    convertToMM(){ this.valueVal = this.valueVal * 25.4; this.unitVal = "MM" }
 }
 
 module.exports = { Precipitation }

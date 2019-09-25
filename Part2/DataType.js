@@ -1,10 +1,10 @@
-function DataType(typeValue, unitValue) {
-    this.typeValue = typeValue
-    this.unitValue = unitValue
+function DataType(typeVal, unitVal) {
+    this.typeVal = typeVal
+    this.unitVal = unitVal
 }
 
-DataType.prototype.type = function type() { return this.typeValue }
-DataType.prototype.unit = function unit() { return this.unitValue }
+DataType.prototype.type = function type() { return this.typeVal }
+DataType.prototype.unit = function unit() { return this.unitVal }
 
 
 module.exports = { DataType }

@@ -1,12 +1,12 @@
 const { WeatherData } = require("./WeatherData");
 
 class Temperature extends WeatherData {
-    constructor(valueV, unit ,time, place){
-        let type = "Temperature"
-        super(valueV, type, unit ,time, place);
+    constructor(valueVal, unitVal ,timeVal, placeVal){
+        let typeVal = "Temperature"
+        super(valueVal, typeVal, unitVal ,timeVal, placeVal);
     }
-    convertToF(){ this.valueV = (this.valueV * 9/5) + 32; this.unit = "Fahrenheit" }
-    convertToC(){ this.valueV = (this.valueV - 32) * 5 / 9; this.unit = "Celsius" }
+    convertToF(){ this.valueVal = (this.valueVal * 9/5) + 32; this.unitVal = "Fahrenheit" }
+    convertToC(){ this.valueVal = (this.valueVal - 32) * 5 / 9; this.unitVal = "Celsius" }
 }
 
 module.exports = { Temperature }

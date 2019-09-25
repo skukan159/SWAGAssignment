@@ -1,8 +1,9 @@
 const { WeatherData } = require("./WeatherData");
 
 class CloudCoverage extends WeatherData {
-    constructor(...args){
-        super(args)
+    constructor(valueVal, unitVal ,timeVal, placeVal){
+        let typeVal = "Cloud Coverage"
+        super(valueVal, typeVal, unitVal ,timeVal, placeVal);
     }
 }
 
