@@ -1,6 +1,7 @@
 const { Event } = require('./Event'); //import Event from './Event'
 const { DataType } = require('./DataType')//import DataType from './DataType'
 const { DateInterval } = require('./DateInterval')//import WeatherData from './WeatherData'
+const { WeatherData } = require('./WeatherData')
 
 
 test('Test of my test runner', () => {
@@ -39,3 +40,15 @@ test('Date Interval tests', () => {
     testContainsDate.setFullYear(2002,18,5);
     expect(dateInterval.contains(testContainsDate)).not.toBe(true);
 })
+
+test('WeatherData tests', () => {
+    let date = new Date();
+    let weatherData = new WeatherData(10,"Temperature","Celsius",date,"Horsens");
+
+    expect(weatherData.value()).toBe(10);
+    expect(weatherData.time()).toBe(date);
+    expect(weatherData.place()).toBe("Horsens");
+    expect(weatherData.type()).toBe("Temperature");
+    expect(weatherData.unit()).toBe("Celsius");
+})
+
