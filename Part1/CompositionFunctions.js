@@ -1,5 +1,5 @@
 
-const acceptedTypes = ["temperature","precipitation","wind","distance","speed"]
+const acceptedTypes = ["temperature","precipitation","wind","distance","speed","cloud coverage"]
 const acceptedTemperatureUnits = ["celsius","fahrenheit","c","f"]
 const acceptedSpeedUnits = ["mph","ms"]
 const acceptedDistanceUnits = ["inches","mm"]

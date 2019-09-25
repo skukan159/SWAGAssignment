@@ -138,9 +138,9 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         
     })
 
-    test('TemperaturePrediction tests', () => {
+    /*test('TemperaturePrediction tests', () => {
         let tempPrediction = TemperaturePrediction()
-    })
+    })*/
 
   /*  test('WeatherPrediction tests', () => {
         let date = new Date();

@@ -33,6 +33,10 @@ const DataType = (type,unit) => {
 
 const WeatherData = (value,type,unit,time,place) => {
     state = { value,time,place,type,unit }
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
         hasValue(state),
         hasEvent(state),
@@ -43,8 +47,10 @@ const WeatherData = (value,type,unit,time,place) => {
 const Temperature = (value,unit,time,place) => {
     let state = { value,unit,type:"Temperature",time,place }
 
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
-        //temperatureConverter(state),
         unitConverter(state),
         hasValue(state),
         hasEvent(state),
@@ -53,6 +59,9 @@ const Temperature = (value,unit,time,place) => {
 
 const Precipitation = (pricipitationType,value,unit,time,place) => {
     let state = { pricipitationType,value,unit,type:"Precipitation",time,place }
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
 
     return Object.assign({},
         precipitationTypeGetter(state),
@@ -68,6 +77,9 @@ const Wind =  (direction,value,unit,time,place) => {
         direction,value,unit,type:"Wind",time,place
     }
 
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
         unitConverter(state),
         directionGetter(state),
@@ -81,6 +93,9 @@ const CloudCoverage =  (value,unit,time,place) => {
         value,unit,type:"Cloud Coverage",time,place
     }
 
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
         hasValue(state),
         hasEvent(state),
@@ -89,11 +104,22 @@ const CloudCoverage =  (value,unit,time,place) => {
 
 const WeatherPrediction = (from,to,unit,type,time,place) => {
     state = {from,to,unit,type,time,place}
-    return Object.assign({},weatherDataComparator(state))
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
+    return Object.assign({},
+        hasEvent(state),
+        hasDataType(state),
+        weatherDataComparator(state))
 }
 
 const TemperaturePrediction = (from,to,unit,time,place) => {
     state = {from,to,unit,type:"Temperature",time,place}
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+    
     return Object.assign({},
         hasEvent(state),
         hasDataType(state),
@@ -104,6 +130,10 @@ const TemperaturePrediction = (from,to,unit,time,place) => {
 
 const PrecipitationPrediction = (from,to,types,unit,time,place) => {
     state = {from,to,types,unit,type:"Precipitation",time,place}
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
         hasEvent(state),
         hasDataType(state),
@@ -115,6 +145,9 @@ const PrecipitationPrediction = (from,to,types,unit,time,place) => {
 const WindPrediction = (from,to,directions,unit,time,place) => {
     state = { from,to,directions,weatherData,unit,type:"Wind",time,place}
 
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+
     return Object.assign({},
         hasEvent(state),
         hasDataType(state),
@@ -124,6 +157,10 @@ const WindPrediction = (from,to,directions,unit,time,place) => {
 }
 const CloudCoveragePrediction = (from,to,unit,time,place) => {
     state = {from,to,weatherData,unit,type:"Cloud Coverage",time,place}
+
+    state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
+    state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
+    
     return Object.assign({},
         weatherDataComparator(state),
         hasEvent(state),   
