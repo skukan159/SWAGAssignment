@@ -188,8 +188,6 @@ const hasCurrentPeriod = (state) => ({
     setCurrentPeriod(period) { state.currentPeriod = period },
     clearCurrentPeriod() { state.currentPeriod = "" }  
 })
-//TODO
-
 
 const hasWeatherData = state => ({
     add(weatherData){ state.weatherData = weatherData },
