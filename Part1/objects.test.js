@@ -213,9 +213,10 @@ test('WindPrediction test', () => {
 
 test('CloudCoveragePrediction test', () => {
     let date = new Date();
-    let cloudCoverage = CloudCoverage(10,"okta",date,"Horsens");
+    let cloudCoverage = CloudCoveragePrediction(5,10,"okta",date,"Horsens");
 
-    expect(cloudCoverage.value()).toBe(10);
+    expect(cloudCoverage.from()).toBe(5);
+    expect(cloudCoverage.to()).toBe(10);
     expect(cloudCoverage.time()).toBe(date);
     expect(cloudCoverage.place()).toBe("Horsens");
     expect(cloudCoverage.type()).toBe("Cloud Coverage");

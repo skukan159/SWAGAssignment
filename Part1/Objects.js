@@ -156,7 +156,7 @@ const WindPrediction = (from,to,directions,unit,time,place) => {
         unitConverter(state))
 }
 const CloudCoveragePrediction = (from,to,unit,time,place) => {
-    state = {from,to,weatherData,unit,type:"Cloud Coverage",time,place}
+    state = {from,to,unit,type:"Cloud Coverage",time,place}
 
     state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)
