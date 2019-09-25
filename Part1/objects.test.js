@@ -182,5 +182,26 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(temperaturePredictionData.unit()).toBe("Celsius");
     })
 
+    test('PrecipitationPrediction test', () => {
+        let date = new Date();
+        let precipitationPrediction = PrecipitationPrediction(5,10,"samplePrecType","mm",date,"Horsens");
+
+        expect(precipitationPrediction.from()).toBe(5);
+        expect(precipitationPrediction.time()).toBe(date);
+        expect(precipitationPrediction.place()).toBe("Horsens");
+        expect(precipitationPrediction.type()).toBe("Precipitation");
+        expect(precipitationPrediction.unit()).toBe("mm");
+
+       precipitationPrediction.convertToUS();
+       expect(precipitationPrediction.from()).toBe(5/25.4);
+       expect(precipitationPrediction.to()).toBe(10/25.4);
+        expect(precipitationPrediction.unit()).toBe("mm");
+
+        precipitationPrediction.convertToInternational();
+        expect(precipitationPrediction.from()).toBe(5);
+        expect(precipitationPrediction.to()).toBe(10);
+        expect(precipitationPrediction.unit()).toBe("MM");
+    })
+
 
     
