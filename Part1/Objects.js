@@ -143,7 +143,7 @@ const PrecipitationPrediction = (from,to,types,unit,time,place) => {
 }
 
 const WindPrediction = (from,to,directions,unit,time,place) => {
-    state = { from,to,directions,weatherData,unit,type:"Wind",time,place}
+    state = { from,to,directions,unit,type:"Wind",time,place}
 
     state.type = myTypeChecker.checkIfCorrectTypeEntered(state.type);
     state.unit = myTypeChecker.checkIfCorrectUnitEntered(state.type,state.unit)

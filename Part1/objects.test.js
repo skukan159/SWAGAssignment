@@ -181,7 +181,7 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(temperaturePredictionData.to()).toBe(15);
         expect(temperaturePredictionData.unit()).toBe("Celsius");
     })
-
+/*
     test('PrecipitationPrediction test', () => {
         let date = new Date();
         let precipitationPrediction = PrecipitationPrediction(5,10,"samplePrecType","mm",date,"Horsens");
@@ -201,6 +201,19 @@ const { Event,DataType,DateInterval,WeatherData,Temperature,
         expect(precipitationPrediction.from()).toBe(5);
         expect(precipitationPrediction.to()).toBe(10);
         expect(precipitationPrediction.unit()).toBe("MM");
+    })*/
+
+    test('WindPrediction test', () => {
+        let date = new Date();
+
+        let wind = WindPrediction(5,10,"NE","MS",date,"Horsens");
+
+        expect(wind.from()).toBe(5);
+        expect(wind.to()).toBe(10);
+        expect(wind.time()).toBe(date);
+        expect(wind.place()).toBe("Horsens");
+        expect(wind.unit()).toBe("MS");
+
     })
 
 
