@@ -1,5 +1,6 @@
-import { WeatherData } from "./WeatherData";
-export default class Wind extends WeatherData {
+const { WeatherData } = require("./WeatherData");
+
+class Wind extends WeatherData {
     constructor(direction,...args){
         super(args)
         this.direction = direction
@@ -9,3 +10,5 @@ export default class Wind extends WeatherData {
     convertToMPH() { this.value = this.value * 2,237; this.unit = "MPH" }
     convertToMS() { this.value = this.value / 2,237; this.unit = "MS" }
 }
+
+module.exports = { Wind }

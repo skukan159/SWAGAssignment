@@ -1,7 +1,7 @@
-import { DataType } from "./DataType";
-import { Event } from "./Event";
+const { DataType } = require("./DataType");
+const { Event } = require("./Event");
 
-export default class WeatherPrediction extends Event(DataType) {
+class WeatherPrediction extends Event(DataType) {
     constructor(weatherData,from,to,...args){
         super(args)
         this.weatherData = weatherData
@@ -13,3 +13,5 @@ export default class WeatherPrediction extends Event(DataType) {
     to(){ return this.to }
     from(){ return this.from }
 }
+
+module.exports = { WeatherPrediction }

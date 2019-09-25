@@ -1,5 +1,6 @@
-import { WeatherData } from "./WeatherData";
-export default class Precipitation extends WeatherData {
+const { WeatherData } = require("./WeatherData");
+
+class Precipitation extends WeatherData {
     constructor(...args){
         super(args)
     }
@@ -8,3 +9,5 @@ export default class Precipitation extends WeatherData {
     convertToInches() { this.value / 25.4; this.unit = "Inches" }
     convertToMM(){ this.value * 25.4; this.unit = "MM" }
 }
+
+module.exports = { Precipitation }
