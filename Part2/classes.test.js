@@ -8,6 +8,9 @@ const { Wind } = require('./Wind')
 const { CloudCoverage } = require('./CloudCoverage')
 const { WeatherPrediction } = require('./WeatherPrediction')
 const { TemperaturePrediction } = require('./TemperaturePrediction')
+const { PrecipitationPrediction } = require('./PrecipitationPrediction')
+const { WindPrediction } = require('./WindPrediction')
+const { CloudCoveragePrediction } = require('./CloudCoveragePrediction')
 
 test('Event class tests', () => {
     let date = new Date()
@@ -144,7 +147,6 @@ test('WeatherPrediction tests', () => {
     
 })
 
-
 test('Temperature prediction test', () => {
     let date = new Date();
     let temperaturePredictionData = new TemperaturePrediction(10,15,"Fahrenheit",date,"Horsens");
@@ -153,4 +155,59 @@ test('Temperature prediction test', () => {
         expect(temperaturePredictionData.from()).toBe((10-32) * 5 /9);
         expect(temperaturePredictionData.to()).toBe((15-32) * 5 / 9);
         expect(temperaturePredictionData.unit()).toBe("Celsius");
-    })
+})
+
+test('PrecipitationPrediction test', () => {
+    let date = new Date();
+    let precipitation1 = new Precipitation("samplePrecType",7,"mm",date,"Horsens");
+    let precipitationTypes = ["type1","type2"]
+    let precipitationPrediction = new PrecipitationPrediction(precipitationTypes,5,10,"mm",date,"Horsens");
+
+    expect(precipitationPrediction.matches(precipitation1)).toBe(true)
+
+    expect(precipitationPrediction.from()).toBe(5);
+    expect(precipitationPrediction.time()).toBe(date);
+    expect(precipitationPrediction.place()).toBe("Horsens");
+    expect(precipitationPrediction.type()).toBe("Precipitation");
+    expect(precipitationPrediction.unit()).toBe("mm");
+
+    precipitationPrediction.convertToInches();
+    expect(precipitationPrediction.from()).toBe(5/25.4);
+    expect(precipitationPrediction.to()).toBe(10/25.4);
+    expect(precipitationPrediction.unit()).toBe("Inches");
+
+    precipitationPrediction.convertToMM();
+    expect(precipitationPrediction.from()).toBe(5);
+    expect(precipitationPrediction.to()).toBe(10);
+    expect(precipitationPrediction.unit()).toBe("MM");
+})
+
+test('WindPrediction test', () => {
+    let date = new Date();
+
+    let wind1 = new Wind("NE",7,"MS",date,"Horsens");
+
+    let wind = new WindPrediction(5,10,"NE","MS",date,"Horsens");
+
+    expect(wind.matches(wind1)).toBe(true);
+    expect(wind.from()).toBe(5);
+    expect(wind.to()).toBe(10);
+    expect(wind.time()).toBe(date);
+    expect(wind.place()).toBe("Horsens");
+    expect(wind.unit()).toBe("MS");
+
+})
+
+test('CloudCoveragePrediction test', () => {
+    let date = new Date();
+    let cloudCoverage = new CloudCoveragePrediction(10,20,"okta",date,"Horsens");
+
+    expect(cloudCoverage.from()).toBe(10);
+    expect(cloudCoverage.to()).toBe(20);
+    expect(cloudCoverage.time()).toBe(date);
+    expect(cloudCoverage.place()).toBe("Horsens");
+    expect(cloudCoverage.type()).toBe("Cloud Coverage");
+    expect(cloudCoverage.unit()).toBe("okta");
+})
+
+

@@ -8,8 +8,18 @@ class Precipitation extends WeatherData {
     }
     
     precipitationType(){ return state.precipitationTypeVal }
-    convertToInches() { this.valueVal = this.valueVal / 25.4; this.unitVal = "Inches" }
-    convertToMM(){ this.valueVal = this.valueVal * 25.4; this.unitVal = "MM" }
+    convertToInches() { 
+        if(this.unitVal.toLowerCase() != "Inches"){
+            this.valueVal = this.valueVal / 25.4; 
+            this.unitVal = "Inches"
+        }
+     }
+    convertToMM(){ 
+        if(this.unitVal.toLowerCase() != "mm"){
+            this.valueVal = this.valueVal * 25.4; 
+            this.unitVal = "MM" 
+        }
+    }
 }
 
 module.exports = { Precipitation }
