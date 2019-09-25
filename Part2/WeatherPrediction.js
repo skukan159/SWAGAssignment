@@ -1,38 +1,30 @@
 const { DataType } = require("./DataType");
 const { Event } = require("./Event");
 
-class WeatherPrediction extends Event(DataType) {
-    constructor(fromVal, toVal, type, unit, time, place){
-        Event.call(this, time, place)
-        DataType.call(this, type, unit)
+function WeatherPrediction(fromVal, toVal, typeVal, unitVal, timeVal, placeVal) {
+        Event.call(this, timeVal, placeVal)
+        DataType.call(this, typeVal, unitVal)
         this.fromVal = fromVal;
-        this.toVal = toVal
-    }
-
-    matches(data) {return this.weatherData === data } 
-    to(){ return this.to }
-    from(){ return this.from }
+        this.toVal = toVal;
 }
 
 
-WeatherPrediction.prototype.matches = function matches(weatherDataObj) 
-{
-    if(this.type.toLowerCase() === weatherDataObj.type().toLowerCase() &&
-        this.unit.toLowerCase() === weatherDataObj.unit().toLowerCase() &&
-        this.time.getDate() === weatherDataObj.time().getDate())
-    {
-        if(weatherDataObj.value() >= this.from && weatherDataObj.value() <= this.to)
+WeatherPrediction.prototype.matches = function matches(data) 
+{ 
+    if(this.typeVal.toLowerCase() === data.type().toLowerCase() &&
+         this.unitVal.toLowerCase() === data.unit().toLowerCase() &&
+         this.timeVal.getDate() === data.time().getDate())
         {
-            return true;
-        } 
-    }   
+            if(data.value() >= this.fromVal && data.value() <= this.toVal){
+                return true;
+            } 
+        }
+        return false;  
 }
-WeatherPrediction.prototype.to = function to() { return this.fromVal }
-WeatherPrediction.prototype.from = function from() { return this.toVal }
+WeatherPrediction.prototype.to = function to() { return this.toVal }
+WeatherPrediction.prototype.from = function from() { return this.fromVal }
 
 
 Object.assign(WeatherPrediction.prototype, DataType.prototype, Event.prototype)
 
 module.exports = { WeatherPrediction }
-
-

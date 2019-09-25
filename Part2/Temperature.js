@@ -5,8 +5,18 @@ class Temperature extends WeatherData {
         let typeVal = "Temperature"
         super(valueVal, typeVal, unitVal ,timeVal, placeVal);
     }
-    convertToF(){ this.valueVal = (this.valueVal * 9/5) + 32; this.unitVal = "Fahrenheit" }
-    convertToC(){ this.valueVal = (this.valueVal - 32) * 5 / 9; this.unitVal = "Celsius" }
+    convertToF(){ 
+        if(this.unitVal.toLowerCase() != "fahrenheit"){
+            this.valueVal = (this.valueVal * 9/5) + 32; 
+            this.unitVal = "Fahrenheit" 
+        }
+    }
+    convertToC(){ 
+        if(this.unitVal.toLowerCase() != "celsius"){
+            this.valueVal = (this.valueVal - 32) * 5 / 9; 
+            this.unitVal = "Celsius"
+        }
+    }
 }
 
 module.exports = { Temperature }

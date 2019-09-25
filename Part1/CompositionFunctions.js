@@ -158,7 +158,6 @@ const speedConverter = state => ({
 })
 
 
-
 const dateChecker = state => ({
     from() { return state.from },
     to() { return state.to},
@@ -197,16 +196,12 @@ const unitConverter = state => ({
      } 
 })
 
-
-
 const precipitationTypeGetter = (state) => ({
     precipitationType(){ return state.pricipitationType }
 })
 const precipitationTypesGetter = (state) => ({
     types(){ return state.types }
 }) 
-
-
 
 
 const directionGetter = (state) => ({

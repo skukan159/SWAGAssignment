@@ -6,10 +6,8 @@ const { Temperature } = require('./Temperature')
 const { Precipitation } = require('./Precipitation')
 const { Wind } = require('./Wind')
 const { CloudCoverage } = require('./CloudCoverage')
-
-test('Test of my test runner', () => {
-    expect(1+1).toBe(2)
-})
+const { WeatherPrediction } = require('./WeatherPrediction')
+const { TemperaturePrediction } = require('./TemperaturePrediction')
 
 test('Event class tests', () => {
     let date = new Date()
@@ -122,6 +120,37 @@ test('CloudCoverage tests', () => {
     expect(cloudCoverage.place()).toBe("Horsens");
     expect(cloudCoverage.type()).toBe("Cloud Coverage");
     expect(cloudCoverage.unit()).toBe("okta");
+})
 
+
+test('WeatherPrediction tests', () => {
+    let date = new Date();
+
+    let  weatherData1 = new WeatherData(10,"Temperature","Celsius",date,"Horsens");
+    let  weatherData2 = new WeatherData(10,"Temperature","Celsius",date,"Vejle");
+    let  weatherData3 = new WeatherData(4,"Temperature","Celsius",date,"Skanderborg");
+    let  weatherData4 = new WeatherData(2,"Temperature","Celsius",date,"Horsens");
+
+    let weatherPrediction = new WeatherPrediction(5,15,"Temperature","Celsius",date,"Horsens");
+    let weatherPrediction2 = new WeatherPrediction(8,15,"Temperature","Celsius",date,"Vejle");
+
+    expect(weatherPrediction.matches(weatherData4)).toBe(false);
+    expect(weatherPrediction2.matches(weatherData1)).toBe(true);
+    expect(weatherPrediction2.matches(weatherData2)).toBe(true);
+    expect(weatherPrediction2.matches(weatherData3)).toBe(false);
+
+    expect(weatherPrediction.to()).toBe(15);
+    expect(weatherPrediction2.from()).toBe(8);
     
 })
+
+
+test('Temperature prediction test', () => {
+    let date = new Date();
+    let temperaturePredictionData = new TemperaturePrediction(10,15,"Fahrenheit",date,"Horsens");
+
+        temperaturePredictionData.convertToC();
+        expect(temperaturePredictionData.from()).toBe((10-32) * 5 /9);
+        expect(temperaturePredictionData.to()).toBe((15-32) * 5 / 9);
+        expect(temperaturePredictionData.unit()).toBe("Celsius");
+    })
