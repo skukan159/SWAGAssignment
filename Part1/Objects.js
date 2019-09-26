@@ -177,7 +177,11 @@ const WeatherHistory = (weatherData,currentPlace,currentType,currentPeriod) => {
         hasCurrentPeriod(state),
         hasWeatherData(state))
 }
-//Not Needed
+
+// Not Needed to make WeatherForecast
+// WeatherForecast has the same methods as WeatherHistory
+// so we can use the same WeatherHistory object
+
 /*
 const WeatherForecast = (weatherData,place,type,currentPeriod) => {
     let state = { place,type,currentPeriod,weatherData }

@@ -159,28 +159,34 @@ const speedConverter = state => ({
 
 
 const dateChecker = state => ({
-    from() { return state.from },
-    to() { return state.to},
-    contains(date) { return state.from <= date && state.to >= date }
+    from() { return state.from; },
+    to() { return state.to; },
+    contains(date) { 
+        let f = state.from.getFullYear();
+        let t = state.to.getFullYear();
+        let d = date.getFullYear();
+        let contains = state.from <= date && state.to >= date;
+        return contains;
+ }
 })
 const hasEvent = state => ({
-    time() { return state.time},
-    place() { return state.place}
+    time() { return state.time; },
+    place() { return state.place; }
 })
 
 //An example of alternative way composition
 //functions could be written
 const hasEvent2 = (time,place) => ({
-    time() { return time},
-    place() { return place}
+    time() { return time; },
+    place() { return place; }
 })
 const hasDataType = (state) => ({
     
-    type() { return state.type },
-    unit() { return state.unit }
+    type() { return state.type; },
+    unit() { return state.unit; }
 })
 const hasValue = state => ({
-    value() { return state.value }
+    value() { return state.value; }
 })
 
 const unitConverter = state => ({
@@ -248,30 +254,35 @@ const hasCurrentPeriod = (state) => ({
 })
 
 const hasWeatherData = state => ({
-    add(weatherData){ state.weatherData = weatherData },
+    add(weatherDataObj){ state.weatherData.push(weatherDataObj) },
     convertToUSUnits() { 
-        state.weatherData.forEach(weatherDataObj => {
-            weatherDataObj.convertToUS()
+        let newWeatherData = state.weatherData.map(weatherDataObj => {
+            weatherDataObj.convertToUS();
+            return weatherDataObj;
         });
+        state.weatherData = newWeatherData;
     },
     
     convertToInternationalUnits() {
-        state.weatherData.forEach(weatherDataObj => {
-            weatherDataObj.convertToInternational()
+        let newWeatherData = state.weatherData.map(weatherDataObj => {
+            weatherDataObj.convertToInternational();
+            return weatherDataObj;
         });
+        state.weatherData = newWeatherData;
     },
 
     data() 
     { 
-        return state.weatherData.filter((weatherDataObj) => 
+        let filteredWeatherData = state.weatherData.filter((weatherDataObj) => 
         {
-            if((weatherDataComparator.type === state.type || state.type === "")
-                && (weatherDataComparator.place === state.place || state.place === "")
-                && (state.currentPeriod.contains(weatherDataComparator.time) === state.type || state.currentPeriod === ""))
+            if((weatherDataObj.type() === state.currentType || state.currentType === "")
+                && (weatherDataObj.place() === state.currentPlace || state.currentPlace === "")
+                && (state.currentPeriod.contains(weatherDataObj.time()) === true || state.currentPeriod === ""))
                 {
                     return weatherDataObj;
                 }
         })      
+        return filteredWeatherData;
     }
 })
 
