@@ -1,15 +1,15 @@
 const { WeatherData } = require("./WeatherData");
 
-class Wind extends WeatherData {
-    constructor(directionVal,valueVal, unitVal ,timeVal, placeVal){
-        let typeVal = "Wind"
-        super(valueVal, typeVal, unitVal ,timeVal, placeVal);
-        this.directionVal = directionVal;
-    }
+function Wind(directionVal,valueVal, unitVal ,timeVal, placeVal) {
+    let typeVal = "Wind"
+    WeatherData.call(directionVal,valueVal, unitVal ,timeVal, placeVal)
+    this.directionVal = directionVal;
+}    
     
-    direction(){ return this.directionVal }
-    convertToMPH() { this.valueVal = this.valueVal * 2.237; this.unitVal = "MPH" }
-    convertToMS() { this.valueVal = this.valueVal / 2.237; this.unitVal = "MS" }
-}
+Wind.prototype.direction = function direction() { return this.directionVal }
+Wind.prototype.convertToMPH = function convertToMPH() { this.valueVal = this.valueVal * 2.237; this.unitVal = "MPH" }
+Wind.prototype.convertToMS = function convertToMS() { this.valueVal = this.valueVal / 2.237; this.unitVal = "MS" }
+
+Object.assign(Wind.prototype, WeatherData.prototype)
 
 module.exports = { Wind }

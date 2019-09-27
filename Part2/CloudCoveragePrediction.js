@@ -1,4 +1,5 @@
 const { WeatherPrediction } = require("./WeatherPrediction");
+
 class CloudCoveragePrediction extends WeatherPrediction {
     constructor(fromVal, toVal, unitVal, timeVal, placeVal){
         let typeVal = "Cloud Coverage"

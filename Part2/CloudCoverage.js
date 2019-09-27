@@ -1,10 +1,10 @@
 const { WeatherData } = require("./WeatherData");
 
-class CloudCoverage extends WeatherData {
-    constructor(valueVal, unitVal ,timeVal, placeVal){
-        let typeVal = "Cloud Coverage"
-        super(valueVal, typeVal, unitVal ,timeVal, placeVal);
-    }
+function CloudCoverage(valueVal, typeVal, unitVal ,timeVal, placeVal) {
+    let typeVal = "Cloud Coverage"
+    WeatherData.call(valueVal, typeVal, unitVal ,timeVal, placeVal)
 }
+
+Object.assign(CloudCoverage.prototype, WeatherData.prototype)
 
 module.exports = { CloudCoverage }
