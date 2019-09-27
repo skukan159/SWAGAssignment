@@ -1,7 +1,7 @@
 const { DataType } = require("./DataType");
 const { Event } = require("./Event");
 
-function WeatherData(valueVal,typeVal, unitVal ,timeVal, placeVal) {
+function WeatherData(valueVal, typeVal, unitVal, timeVal, placeVal) {
     Event.call(this, timeVal, placeVal)
     DataType.call(this, typeVal, unitVal)
     this.valueVal = valueVal;
