@@ -254,7 +254,13 @@ const hasCurrentPeriod = (state) => ({
 })
 
 const hasWeatherData = state => ({
-    add(weatherDataObj){ state.weatherData.push(weatherDataObj) },
+    add(weatherDataObj) {
+        if (Object.prototype.toString.call(weatherDataObj) === "[object Array]") {
+            weatherDataObj.forEach(weatherDataObj => state.weatherData.push(weatherDataObj))
+            return;
+        }
+        state.weatherData.push(weatherDataObj)
+    },
     convertToUSUnits() { 
         let newWeatherData = state.weatherData.map(weatherDataObj => {
             weatherDataObj.convertToUS();
